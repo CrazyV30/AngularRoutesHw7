@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ReactiveForm } from './reactive-form/reactive-form';
 
 @Component({
   imports: [RouterOutlet],

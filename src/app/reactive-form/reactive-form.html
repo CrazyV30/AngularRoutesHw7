@@ -1,0 +1,83 @@
+<a routerLink="/city">City</a>
+
+<h1>Reactive Form Task</h1>
+<form [formGroup]="reactForm" (ngSubmit)="sendForm(reactForm)">
+  <div>Username:
+    <input type="text" name="userName" placeholder="Name..." formControlName="userName">
+    @if (reactForm.get('userName')?.invalid && reactForm.get('userName')?.touched) {
+      <p class="alert">Required field</p>
+    }
+  </div>
+
+  <div>Email:
+    <input type="email" name="email" placeholder="Email..." formControlName="email">
+    @if (reactForm.get('email')?.invalid && reactForm.get('email')?.touched) {
+      <p class="alert">Uncorrect email</p>
+    }
+  </div>
+
+  <div>Password:
+    <input type="password" name="password" placeholder="Password..." formControlName="password">
+    @if (reactForm.get('password')?.invalid && reactForm.get('password')?.touched) {
+      <p class="alert">Uncorrect password. It is weak.</p>
+    }
+  </div>
+
+  <div>Confirm password:
+    <input type="password" name="confPassword" placeholder="Confirm password..." formControlName="confPassword">
+    @if (reactForm.getError('mismatch')) {
+      <p class="alert">Passwords do not match</p>
+    }
+  </div>
+
+  <div>
+    <p>Choose education:</p>
+    @for (educ of arrEduc; track $index) {
+      <label>
+        <input type="radio" formControlName="education" [value]="educ">{{educ}}
+      </label>
+    }
+  </div>
+
+  <div>Date of birth:
+    <input type="date" name="birthDate" formControlName="birthDate">
+    @if (reactForm.get('birthDate')?.invalid && reactForm.get('birthDate')?.touched) {
+      <p class="alert">Required field</p>
+    }
+  </div>
+
+  <div>Address:
+    <input type="text" name="address" placeholder="Address..." formControlName="address">
+    @if (reactForm.get('address')?.invalid && reactForm.get('address')?.touched) {
+      <p class="alert">Required field</p>
+    }
+  </div>
+
+  <div formArrayName="hobbies">
+    <p>Choose hobbies:</p>
+    @for (hobby of arrHobbies; track $index) {
+      <label>
+        <input type="checkbox" [formControlName]="$index" [value]="hobby">{{hobby}}
+      </label>
+    }
+  </div>
+
+  <div>Avatar file:
+    <input type="file" name="avatar" placeholder="Avatar URL..." formControlName="avatar">
+    @if (reactForm.get('avatar')?.invalid && reactForm.get('avatar')?.touched) {
+      <p class="alert">Uncorrect file</p>
+    }
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" name="agreement" formControlName="agreement">
+      I agree with terms
+    </label>
+    @if (reactForm.get('agreement')?.invalid && reactForm.get('agreement')?.touched) {
+      <p class="alert">You must agree</p>
+    }
+  </div>
+
+  <button type="submit">Send</button>
+</form>
